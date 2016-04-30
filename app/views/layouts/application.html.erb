@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Traid</title>
+        <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300italic,700|Karla|Raleway|Lora|Montserrat' rel='stylesheet' type='text/css'>
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+<%#= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+        <%= csrf_meta_tags %>
+    </head>
+    <body>
+      <div class="jumbotron text-center">
+        <h1>TRAID Database System</h1>
+      </div>
+      <div class="container-fluid text-center">
+        <h2><%= @header %></h2>
+        <%= yield %>
+      </div>
+
+        <p id="return_link">
+            <%= link_to('home', root_url) %>
+        </p>
+
+    </body>
+</html>

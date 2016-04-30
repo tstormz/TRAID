@@ -1,0 +1,18 @@
+<% transactions = {:controller => 'transactions'} %>
+<% customers = {:controller => 'customers'} %>
+<% items = {:controller => 'items'} %>
+<h4>Transactions</h4>
+<div class="list-group">
+  <%= link_to('Create a Transaction', transactions.merge({:action => 'new'}), :class => "list-group-item") %>
+  <%= link_to('Sort Transactions', {:controller => 'sort'}, :class => "list-group-item") %>
+</div>
+<h4>Customers</h4>
+<div class="list-group">
+  <%= link_to('New Customer', customers.merge({:action => 'new'}), :class => "list-group-item") %>
+  <%= link_to('Search Customers', customers.merge({:action => 'search'}), :class => "list-group-item") %>
+  <%= link_to('Show Customers', customers.merge({:action => 'show'}), :class => "list-group-item") %>
+</div>
+<h4>Items</h4>
+<div class="list-group">
+  <%= link_to('Show items', items.merge({:action => 'show'}), :class => "list-group-item") %>
+</div>

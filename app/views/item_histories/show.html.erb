@@ -1,0 +1,18 @@
+<h1>ItemHistories#show</h1>
+<ul>
+    <li><%= @item.name %></li>
+    <% @history.each do |event| %>
+      <li>
+          <%= "Out: #{event.time_out} " %>
+          <% customer = @transactions.shift.customer %>
+          <%= " for #{customer.first_name} #{customer.last_name}" %>
+          <% unless event.time_in.nil? %>
+            <ul>
+                <li><%= "Returned: #{event.time_in}" %></li>
+            </ul>
+          <% end %>
+        </li>
+      <% end %>
+  </ul>
+
+<%= link_to('<< back', {:controller => 'items', :action => 'show'}) %>

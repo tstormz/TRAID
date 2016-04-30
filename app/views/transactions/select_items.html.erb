@@ -1,0 +1,32 @@
+<% list = (@transaction.items.nil?) ? @transaction.items : Array.new %>
+
+<%= form_tag({:action => 'process_items', :transaction_id => @transaction.id}, method: 'post') do %>
+<table class="horizontal">
+    <th class="check_box">&nbsp;</th>
+    <th class="result_list"><%= label_tag(:name, 'Name') %></th>
+    <th><%= label_tag(:type, 'Type') %></th>
+    <% @results.each do |item| %>
+      <tr>
+          <td>
+              <% unless list.include? item %>
+                <% if item.available %>
+                  <%= check_box_tag("items[]", item.id) %>
+                <% end %>
+              <% end %>
+          </td>
+          <td class="result_list">
+              <%= label_tag(:name, highlight(item.name, @search_terms)) %>
+          </td>
+          <td>
+              <% unless item.item_type.nil? %>
+                <%= label_tag(:item_type, item.item_type) %>
+              <% end %>
+          </td>
+      </tr>
+    <% end %>
+</table>
+<%= submit_tag('Continue') %>
+<% end %>
+<%= button_to('Search Again', {:action => 'add_items', :transaction_id => @transaction.id}) %>
+<%= button_to('Cancel Transaction', {:action => 'delete',
+        :transaction_id => @transaction.id}) %>

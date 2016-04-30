@@ -1,0 +1,21 @@
+<% current_list = (@transaction.items.nil?) ? Array.new : @transaction.items %>
+
+<% unless current_list.empty? %>
+  <div class="result_list">
+    <ul>
+      <li>Current Item List</li>
+      <ul>
+        <% @transaction.items.each do |item| %>
+          <li class="result_list"><%= item.name %></li>
+        <% end %>
+      </ul>
+    </ul>
+  </div>
+<% end %>
+
+<%= button_to('Add More Items', {:action => 'add_items', :transaction_id => @transaction.id}) %>
+<% unless @transaction.items.blank? %>
+  <%= button_to('Finished Adding Items', {:action => 'details', :transaction_id => @transaction.id}) %>
+<% end %>
+<%= button_to('Cancel Transaction', {:action => 'delete',
+        :transaction_id => @transaction.id}) %>

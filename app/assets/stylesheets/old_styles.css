@@ -1,0 +1,173 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+/* GLOBAL STYLES */
+
+* {
+    margin: 0;
+}
+
+body {
+    
+}
+
+/* TEXT AND COMPONENTS */
+
+p, td, th, label, ul li {
+    font-family: "Georgia";
+    color: #222;
+    font-weight: 400;
+}
+
+h2 {
+    text-align: center;
+}
+
+h1, h2 {
+    margin-bottom: 2rem;
+}
+
+h1 {
+    font-family: 'Raleway';
+    font-size: 1.25rem;
+    padding: 1rem;
+    background-color: #03426a;
+    color: #fff;
+}
+
+h2 {
+    font-family: "Karla";
+    font-size: 2rem;
+}
+
+input {
+    font-size: 1rem;
+    padding: 0.5rem;
+}
+
+input[type='submit'] {
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+   letter-spacing: 1px;
+   font-size: 1rem;
+   margin-top: 2rem;
+   padding: 1rem 4rem;
+   border: 0;
+   background-color: #ffc173;
+}
+
+form.button_to input[type='submit'] {
+    margin: 2rem 0 0 0;
+}
+
+/* FORMAT AND CONTAINERS */
+
+#container {
+    margin: 0 auto;
+    width: 56.25rem;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+}
+
+td, th {
+    text-align: center;
+}
+
+td {
+    font-family: "Inconsolata";
+}
+
+th {
+    padding-right: 0.5rem;
+}
+
+table.vertical th {
+    text-align: right;
+    width: 40%;
+}
+
+table.vertical td {
+    text-align: left;
+    padding: 0.75rem 0;
+}
+
+table.horizontal {
+    width: 50%;
+    margin: 0 auto;
+}
+
+table.horizontal th, table.horizontal td {
+    text-align: left;
+}
+
+table.horizontal th.check_box {
+    width: 3%;
+}
+
+.result_list {
+    padding: 0.75rem;
+}
+
+div.result_list {
+    width: 50%;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.result_list label {
+    font-family: "Inconsolata";
+}
+
+p#new_transaction span {
+    margin: 0 0.75rem;
+}
+
+/* LISTS */
+
+ul {
+    list-style-type: none;
+    text-align: left;
+}
+
+ul ul {
+    list-style-type: decimal;
+}
+
+ul#menu ul li {
+    padding: 3px 0;
+}
+
+ul#menu + li {
+    padding-top: 18px;
+}
+
+/* LINKS */
+
+a:hover {
+    text-decoration: none;
+}
+
+/* TEMP */
+
+p#return_link {
+    position: fixed;
+    top: 5%;
+    right: 5%;
+}

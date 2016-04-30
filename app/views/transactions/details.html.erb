@@ -1,0 +1,31 @@
+<% customer = @transaction.customer %>
+
+<table class="vertical">
+  <tr>
+    <th><label>Customer:</label></th>
+    <td><%= "#{customer.first_name} #{customer.last_name}" %></td>
+  </tr>
+  <tr>
+    <th><label>Transaction Type:</label></th>
+    <td><%= code_to_label("get_types", @transaction.transaction_type) %></td>
+  </tr>
+</table>
+
+<div class="result_list">
+  <ul>
+    <li>Items</li>
+    <ul>
+      <% @transaction.items.each do |item| %>
+        <li><%= item.name %></li>
+      <% end %>
+    </ul>
+  </ul>
+</div>
+
+<%= form_for(:transaction, :url => {:action => 'create', :transaction_id => @transaction.id}) do |f| %>
+
+  <%= render(:partial => "fields", :locals => {:f => f}) %>
+
+  <%= submit_tag("Create Transaction") %>
+
+<% end %>

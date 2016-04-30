@@ -1,0 +1,41 @@
+<%= form_tag(:action => 'show', :method => 'get') do %>
+
+  <%= select_tag(:sort_by, options_for_select(@fields + [['Item Type', 'item_type']])) %>
+
+  <%= submit_tag('Sort') %>
+
+<% end %>
+
+<%= button_to('Start Over', {:action => 'index'}) %>
+
+<table>
+  <tr>
+      <% @fields.each do |f| %>
+      <th><%= f.first %></th>
+    <% end %>
+    <th>Item</th>
+    <th>Type of Item</th>
+  </tr>
+
+  <% @transactions.each do |t| %>
+    <tr>
+      <td><%= t.id %></td>
+      <td><%= t.created_at %></td>
+      <td><%= "#{t.customer.first_name} #{t.customer.last_name}" %></td>
+      <td><%= code_to_label("get_types", t.transaction_type) %></td>
+      <td><%= t.sheet_code %></td>
+      <% reported = (t.reported) ? "Reported" : "Not Reported" %>
+      <td><%= reported %></td>
+      <% t.items.each do |item| %>
+        <td><%= item.name %></td>
+        <td><%= item.item_type %></td>
+      </tr>
+      <% if t.items.size > 1 %>
+        <tr>
+        <% @fields.size.times do %>
+          <td></td>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+</table>

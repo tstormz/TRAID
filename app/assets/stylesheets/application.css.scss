@@ -1,0 +1,59 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+body {
+    background-color: #EEE;
+}
+
+.jumbotron {
+    background-color: #0A67A3;
+    color: #EEE;
+    padding-left: 3%;
+}
+
+h1, h2{
+    font-family: Montserrat, sans-serif;
+}
+
+h2 {
+    margin: 3rem 0;
+}
+
+p {
+    padding: 2rem 0;
+}
+
+span {
+    font-family: Georgia, serif;
+    font-size: 1.5rem;
+    padding: 0 0.25rem;
+}
+
+input[type='submit'] {
+    padding: 1rem 4rem;
+}
+
+.btn {
+    margin: 1rem 0;
+}
+
+form.form-horizontal label {
+    margin-right: 0.5rem;
+}
+
+input[type='text'] {
+    padding: 0.5rem;
+}
+
+table {
+    width: 90%;
+    margin: 0 auto;
+}
+
+th {
+    text-align: center;
+}
+
+th, td {
+    padding: 1rem;
+}

@@ -1,0 +1,21 @@
+<h1>Customers#show</h1>
+<% hash = {:controller => 'transactions'} %>
+<table class="table-striped">
+    <tr>
+        <th>Last Name</th>
+        <th>First Name</th>
+        <th>Transactions</th>
+    </tr>
+    <% @customers.each do |customer| %>
+      <tr>
+          <td><%= customer.last_name %></td>
+          <td><%= customer.first_name %></td>
+          <td>
+              <%= link_to(customer.transactions.size,
+                hash.merge({:action => 'show', :customer_id => customer.id, 
+                    :page => '0'})) %>
+          </td>
+      </tr>
+    <% end %>
+</table>
+<br />

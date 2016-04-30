@@ -1,0 +1,45 @@
+<table class="vertical">
+    <tr>
+        <th><%= f.label(:contact_name, "Contact Name") %></th>
+        <td><%= f.text_field(:contact_name) %></td>
+    </tr>
+    <tr>
+        <th><%= f.label(:borrower_type, "Borrower Type") %></th>
+        <td><%= f.select(:borrower_type, options_for_select(@borrower_types)) %></td>
+    </tr>
+    <tr>
+        <th><%= f.label(:brochures_sent, "Brochures Sent") %></th>
+        <td><%= f.text_field(:brochures_sent) %></td>
+    </tr>
+    <tr>
+        <th><%= f.label(:ucp_customer, "UCP Customer") %></th>
+        <td><%= f.select(:ucp_customer, options_for_select(@ucp_options)) %></td>
+    </tr>
+    <% if @transaction.transaction_type == "dml" %>
+      <tr>
+          <th><%= f.label(:decision, "Decision") %></th>
+          <td><%= f.text_field(:decision) %></td>
+      </tr><% end %>
+    <tr>
+        <th><%= f.label(:purpose_of_at, "Purpose of AT") %></th>
+        <td><%= f.select(:purpose_of_at, options_for_select(@at_options)) %></td>
+    </tr>
+    <% if ['exc', 'rec', 'oel'].include? @transaction.transaction_type %>
+      <tr>
+          <th><%= f.label(:reason_use_us, "Reason For Using Us") %></th>
+          <td><%= f.select(:reason_use_us, options_for_select(@reason_options)) %></td>
+      </tr>
+    <% end %>
+    <tr>
+        <th><%= f.label(:sheet_code, "Sheet Code") %></th>
+        <td><%= f.text_field(:sheet_code) %></td>
+    </tr>
+    <tr>
+        <th><%= f.label(:borrowed, "Date Borrowed") %></th>
+        <td><%= f.datetime_select(:borrowed, :default => DateTime.now) %></td>
+    </tr>
+    <tr>
+        <th><%= f.label(:reported, "Reported") %></th>
+        <td><%= f.check_box :reported %></td>
+    </tr>
+</table>

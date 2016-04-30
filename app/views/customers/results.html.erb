@@ -1,0 +1,20 @@
+<% hash = {:action => 'process_request', :method => :get} %>
+<% unless @transaction.nil? %>
+  <% hash = hash.merge({:transaction_id => @transaction.id}) %>
+<% end %>
+<%= form_tag(hash) do %>
+  <% @results.each do |customer| %>
+    <div class="radio">
+      <label>
+        <input type='radio' name='customer_id' value='<%= customer.id %>' />
+        <% name = [customer.last_name, customer.first_name].join(', ') %>
+        <%= highlight(name, @search_terms) %>
+      </label>
+    </div>
+  <% end %>
+  
+  <%= submit_tag('Choose', :class => 'btn btn-primary') %>
+  
+<% end %>
+<% hash = {:action => 'search', :transaction_id => @transaction.id} %>
+<%= button_to('Search Again', hash, :class => 'btn btn-primary') %>

@@ -1,0 +1,12 @@
+<% customer = [['Existing', 'existing'], ['New', 'new']] %>
+
+<%= form_tag(:action => 'get_customer', :method => 'get') do %>
+  <p id="new_transaction">
+    <span>Create a new </span>
+    <%= select_tag(:type, options_for_select(@types)) %>
+    <span>transaction for </span>
+    <%= select_tag(:customer, options_for_select(customer)) %>
+    <span>customer. </span>
+  </p>
+  <p><%= submit_tag('Start', :class => 'btn btn-primary') %></p>
+<% end %>

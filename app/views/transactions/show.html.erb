@@ -1,0 +1,47 @@
+<h1>Transaction#show</h1>
+<% t = @transaction %>
+<% c = t.customer %>
+<% i = 0 %>
+<ul>
+    <li>Customer: <%= "#{c.first_name} #{c.last_name}" %></li>
+    <li>Transaction Type: <%= code_to_label("get_types", t.transaction_type) %></li>
+    <li>Items:
+        <ul>
+            <% t.items.each do |item| %>
+              <li>
+                <%= item.name %>
+                <%= @status[i] %>
+                <% i += 1 %>
+              </li>
+            <% end %>
+        </ul>
+    </li>
+    <li>Contact Name: <%= t.contact_name %></li>
+    <li>Borrower Type: <%= t.borrower_type %></li>
+    <li>Brochures Sent: <%= t.brochures_sent %></li>
+    <li>UCP Customer: <%= code_to_label("get_ucp_options", t.ucp_customer) %></li>
+    <% if t.transaction_type == "dml" %>
+      <li>Decision: <%= t.decision %></li>
+    <% end %>
+    <li>Purpose of AT: <%= code_to_label("get_at_options", t.purpose_of_at) %></li>
+    <% if ['exc', 'rec', 'oel'].include? t.transaction_type %>
+      <li>Reason For Using Us:<%= code_to_label("get_reason_options", t.reason_use_us) %></li>
+    <% end %>
+    <li>Sheet Code: <%= t.sheet_code %></li>
+    <li>Date Borrowed: <%= t.borrowed %></li>
+    <li>Date Returned: <%= (t.returned.nil?) ? "Not Returned" : t.returned %></li>
+    <li><%= (t.reported) ? "Reported" : "Not Reported" %></li>
+</ul>
+
+<% unless @page.nil? %>
+  <% hash = {:customer_id => @customer.id} %>
+  <% unless @page == "0" %>
+    <%= link_to('<< previous', hash.merge({:page => @page.to_i - 1})) %>
+  <% end %>
+  
+  <%= "Transaction ##{@transaction.id}" %>
+
+  <% unless @page.to_i == c.transactions.size - 1 %>
+    <%= link_to('next >>', hash.merge({:page => @page.to_i + 1})) %>
+  <% end %>
+<% end %>

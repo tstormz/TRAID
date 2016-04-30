@@ -1,0 +1,47 @@
+<h1>Items#show</h1>
+<table class="table-striped">
+  <thead>
+    <tr>
+        <th>Item Name</th>
+        <th>Available</th>
+        <th>Type</th>
+        <th>Borrower</th>
+        <th>Item History</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+          <% unless item.name.nil? %>
+            <td><%= item.name %></td>
+          <% end %>
+          <td>
+              <% if item.available %>
+                <%= "Available" %>
+              <% else %>
+                <%= link_to('return item', {:action => 'return_item', :item_id => item.id}) %>
+              <% end %>
+          </td>
+          <td>
+              <% unless item.item_type.nil? %>
+                <%= item.item_type %>
+              <% end %>
+          </td>
+          <td>
+              <% unless item.available %>
+                <% t = @borrowers.fetch(item.id).first %>
+                <%= "#{t.customer.first_name} #{t.customer.last_name}" %>
+                <br />
+              <% end %>
+          </td>
+          <td>
+              <% unless item.item_histories.empty? %>
+                <% hash = {:controller => 'item_histories'} %>
+                <% hash = hash.merge({:action => 'show'}) %>
+                <%= link_to('details', hash.merge({:item_id => item.id})) %>
+              <% end %>
+          </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

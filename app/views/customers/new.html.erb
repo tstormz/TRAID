@@ -1,0 +1,9 @@
+<%= form_for(:customer, :url => @tid_hash.merge({:action => 'create'})) do |f| %>
+
+  <%= render(:partial => "fields", :locals => {:f => f}) %>
+
+  <%= submit_tag("Create Customer", :class => "btn btn-primary") %>
+
+<% end %>
+
+<%= button_to('Cancel', {:controller => 'menu', :action => 'index'}, :class => "btn btn-primary") %>
