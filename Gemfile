@@ -4,7 +4,8 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.9'
 # Use mysql as the database for Active Record
-gem 'mysql2', '~> 0.3.18'
+#gem 'mysql2', '~> 0.3.18'
+gem 'pg'
 #Bootstrap
 gem 'bootstrap-sass'
 # Use SCSS for stylesheets
@@ -17,7 +18,7 @@ gem 'bootstrap-sass'
 # gem 'therubyracer',  platforms: :ruby
 
 # Use jquery as the JavaScript library
-#gem 'jquery-rails'
+gem 'jquery-rails', group: :production
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 #gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
