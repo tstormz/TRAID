@@ -14,12 +14,11 @@ class ItemsController < ApplicationController
     @borrowers = Hash.new
     @items.each do |item|
       unless item.available
-        index = item.id
         borrower_list = Array.new
         item.all_transactions.each do |t|
-          borrower_list << t.customer
+          borrower_list << t
         end
-        @borrowers.merge({index => borrower_list})
+        @borrowers[item.id] = borrower_list
       end
     end
   end

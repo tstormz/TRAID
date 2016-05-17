@@ -11,9 +11,13 @@
           <td><%= customer.last_name %></td>
           <td><%= customer.first_name %></td>
           <td>
+            <% unless customer.transactions.size == 0 %>
               <%= link_to(customer.transactions.size,
                 hash.merge({:action => 'show', :customer_id => customer.id, 
                     :page => '0'})) %>
+            <% else %>
+              <%= 0 %>
+            <% end %>
           </td>
       </tr>
     <% end %>

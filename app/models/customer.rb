@@ -8,4 +8,8 @@ class Customer < ActiveRecord::Base
     where("#{field} like ?", "%#{keyword}%")
   }
   
+  scope :existing_customer, lambda { |last_name, first_name| 
+    where("last_name=? and first_name=?", last_name, first_name)
+  }
+  
 end

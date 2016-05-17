@@ -29,7 +29,7 @@
           </td>
           <td>
               <% unless item.available %>
-                <% t = @borrowers.fetch(item.id).first %>
+                <% t = @borrowers[item.id].first %>
                 <%= "#{t.customer.first_name} #{t.customer.last_name}" %>
                 <br />
               <% end %>

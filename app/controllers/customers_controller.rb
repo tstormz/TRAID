@@ -12,14 +12,21 @@ class CustomersController < ApplicationController
   end
   
   def create
-    @customer = Customer.new(customer_params)
-    if @customer.save
-      if @transaction
-        redirect_to({:controller => 'transactions', :action => 'add_customer',
-            :transaction_id => @transaction.id, :customer_id => @customer.id})
-      else
-        redirect_to({:action => 'show'})
+    customer_info = customer_params
+    customer = Customer.existing_customer(customer_info['last_name'], customer_info['first_name'])
+    if customer.empty?
+      @customer = Customer.new(customer_info)
+      if @customer.save
+        if @transaction
+          redirect_to({:controller => 'transactions', :action => 'add_customer',
+              :transaction_id => @transaction.id, :customer_id => @customer.id})
+        else
+          redirect_to({:action => 'show'})
+        end
       end
+    else
+      flash[:alert] = "Existing customer: #{customer_info['first_name']} #{customer_info['last_name']}"
+      redirect_to({:action => 'new'})
     end
   end
   

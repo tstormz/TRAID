@@ -16,5 +16,8 @@
   <%= submit_tag('Choose', :class => 'btn btn-primary') %>
   
 <% end %>
-<% hash = {:action => 'search', :transaction_id => @transaction.id} %>
+<% hash = {:action => 'search'} %>
+<% if @transaction %>
+  <%  hash.merge(:transaction_id => @transaction.id) %>
+<% end %>
 <%= button_to('Search Again', hash, :class => 'btn btn-primary') %>
