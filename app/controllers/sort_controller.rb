@@ -3,17 +3,28 @@ class SortController < ApplicationController
   before_action :get_fields
   
   def index
+    @selection = select_params
     cookies.delete :sort_sequence
-    @transactions = Transaction.newest
+    if params[:selection]
+      @transactions = Transaction.search(parse_selection(@selection))
+    else
+      @transactions = Transaction.newest
+    end
   end
 
   def show
+    @selection = select_params
     if cookies[:sort_sequence]
       cookies[:sort_sequence] = "#{cookies[:sort_sequence]} #{params[:sort_by]}"
     else
       cookies[:sort_sequence] = params[:sort_by]
     end
-    @transactions = Transaction.order_by(cookies[:sort_sequence].split(" "))
+    if params[:selection]
+      @transactions = Transaction.search(parse_selection(@selection))
+        .order_by(cookies[:sort_sequence].split(" "))
+    else
+      @transactions = Transaction.order_by(cookies[:sort_sequence].split(" "))
+    end
   end
   
   def select
@@ -25,38 +36,23 @@ class SortController < ApplicationController
     @at_options.unshift("")
   end
   
-  def make_selection
-    @selection = []
-    select_params.each do |p|
-      unless p.blank?
-        Transaction.search(p[0], p[1]).each do |t|
-          @selection << t
-        end
+  private
+  
+  def parse_selection (params)
+    selection = []
+    query = ""
+    params.each do |p|
+      unless p[1].blank?
+        query += (query.empty?) ? "#{p[0]} = ?" : " or #{p[0]} = ?"
+        selection << p[1]
       end
     end
-    cookies.delete :sort_sequence
-    @transactions = @selection.uniq
-    render('index')
+    selection.unshift(query)
+    return selection
   end
-  
-  private
   
   def select_params
     params.permit(:transaction_type, :borrower_type, :purpose_of_at, :sheet_code)
-  end
-  
-  def execute_statement(sql)
-    results = ActiveRecord::Base.connection.execute(sql)
-    if results.present?
-      return results
-    else
-      return nil
-    end
-  end
-  
-  def create_view(field, value)
-    execute_statement("create or replace view my_view as 
-      select * from transactions where #{field}='#{value}'")
   end
   
   def get_fields

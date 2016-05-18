@@ -1,6 +1,10 @@
-<%= form_tag(:action => 'show', :method => 'get') do %>
+<%= form_tag(:action => 'show', :method => 'post', :selection => true) do %>
 
   <%= select_tag(:sort_by, options_for_select(@fields + [['Item Type', 'item_type']])) %>
+
+  <% @selection.each do |k, v| %>
+    <%= hidden_field_tag(k, v) %>
+  <% end %>
 
   <%= submit_tag('Sort') %>
 

@@ -1,5 +1,5 @@
 <h1>Sort#select</h1>
-<%= form_tag(action: "make_selection", method: "post") do %>
+<%= form_tag({:action => "index", :method => "post", :selection => true}) do %>
   <table class='vertical'>
     <tr>
       <th><%= label_tag(:transaction_type, "Transaction Type") %></th>

@@ -24,8 +24,8 @@ class Transaction < ActiveRecord::Base
     return t
   }
   
-  scope :search, lambda { |field, value|
-    where("#{field}='#{value}'")
+  scope :search, lambda { |selection|
+    where(selection)
   }
   
 end
