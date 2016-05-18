@@ -55,16 +55,22 @@ class CustomersController < ApplicationController
   def process_request
     if params[:search_again]
       redirect_to(:action => 'search', :transaction_id => @transaction.id)
-    else
+    elsif params[:transaction_id]
       hash = {:controller => 'transactions'}
       hash = hash.merge({:action => 'add_customer'})
       hash = hash.merge({:transaction_id => @transaction.id})
       redirect_to(hash.merge({:customer_id => params[:customer_id]}))
+    else
+      redirect_to({:action => 'single', :customer_id => params[:customer_id]})
     end
   end
   
   def delete
     
+  end
+  
+  def single
+    @customer = Customer.find(params[:customer_id])
   end
   
   private

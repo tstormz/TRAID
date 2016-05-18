@@ -1,0 +1,13 @@
+<h1>Customer#single</h1>
+<p><%= "#{@customer.first_name} #{@customer.last_name}" %></p>
+<ul>
+  <li>
+    Transaction History
+    <ul>
+      <% @customer.transactions.each do |transaction| %>
+        <li>#<%= transaction.id %></li>
+      <% end %>
+    </ul>
+  </li>
+</ul>
+  
