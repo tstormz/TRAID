@@ -3,8 +3,9 @@
 <% items = {:controller => 'items'} %>
 <h4>Transactions</h4>
 <div class="list-group">
-  <%= link_to('Create a Transaction', transactions.merge({:action => 'new'}), :class => "list-group-item") %>
-  <%= link_to('Sort Transactions', {:controller => 'sort'}, :class => "list-group-item") %>
+  <%= link_to('Create', transactions.merge({:action => 'new'}), :class => "list-group-item") %>
+  <%= link_to('Sort', {:controller => 'sort'}, :class => "list-group-item") %>
+  <%= link_to('Select', {:controller => 'sort', :action => 'select'}) %>
 </div>
 <h4>Customers</h4>
 <div class="list-group">

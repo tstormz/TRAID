@@ -1,0 +1,38 @@
+<h1>Sort#select</h1>
+<%= form_tag(action: "make_selection", method: "post") do %>
+  <table class='vertical'>
+    <tr>
+      <th><%= label_tag(:transaction_type, "Transaction Type") %></th>
+      <td><%= select_tag(:transaction_type, options_for_select(@transaction_options)) %></td>
+    </tr>
+    <tr>
+      <th><%= label_tag(:borrower_type, "Borrower Type") %></th>
+      <td><%= select_tag(:borrower_type, options_for_select(@borrow_options)) %></td>
+    </tr>
+    <tr>
+      <th><%= label_tag(:purpose_of_at, "Purpose of AT") %></th>
+      <td><%= select_tag(:purpose_of_at, options_for_select(@at_options)) %></td>
+    </tr>
+    <tr>
+      <th><%= label_tag(:sheet_code, "Sheet Code") %></th>
+      <td><%= text_field_tag(:sheet_code) %></td>
+    </tr>
+    <tr>
+      <th><%= label_tag(:reported, "Reported") %></th>
+      <td><%= check_box_tag(:reported) %></td>
+    </tr>
+    <tr>
+      <th><%= label_tag(:not_reported, "Not Reported") %></th>
+      <td><%= check_box_tag(:not_reported) %></td>
+    </tr>
+    <tr>
+      <th><%= label_tag(:before, "Before") %></th>
+      <td><%= select_date Date.today, prefix: :before %></td>
+    </tr>
+    <tr>
+      <th><%= label_tag(:after, "After") %></th>
+      <td><%= select_date Date.today, prefix: :after %></td>
+    </tr>
+  </table>
+  <%= submit_tag("Select") %>
+<% end %>
