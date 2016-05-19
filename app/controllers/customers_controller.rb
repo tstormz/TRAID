@@ -34,6 +34,14 @@ class CustomersController < ApplicationController
     @header = "Search for Existing Customer"
   end
   
+  def find_customer
+    @results = Array.new
+    @search_terms = Array.new
+    customer_params.each do |field,keyword|
+      
+    end
+  end
+  
   def results
     @header = "Select a Customer for Transaction"
     @results = Array.new
@@ -49,6 +57,11 @@ class CustomersController < ApplicationController
           @search_terms << keyword
         end
       end
+    end
+    if @transaction
+      render('results')
+    else
+      render('find')
     end
   end
   
@@ -87,11 +100,11 @@ class CustomersController < ApplicationController
   
   def set_hashes
     if @transaction
-      @tid_hash = {:transaction_id => @transaction.id}
+      @tid_hash = {:action => 'results', :transaction_id => @transaction.id}
       @return_hash = {:controller => 'transactions', :action => 'delete',
         :transaction_id => @transaction.id}
     else
-      @tid_hash = {}
+      @tid_hash = {:action => 'results'}
       @return_hash = {:controller => 'menu', :action => 'index'}
     end
   end
