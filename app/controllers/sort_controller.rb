@@ -38,14 +38,41 @@ class SortController < ApplicationController
   
   private
   
-  def parse_selection (params)
+  def parse_selection (query_params)
     selection = []
     query = ""
-    params.each do |p|
+    query_params.each do |p|
       unless p[1].blank?
         query += (query.empty?) ? "#{p[0]} = ?" : " or #{p[0]} = ?"
         selection << p[1]
       end
+    end
+    reported_params = params.permit(:reported, :not_reported)
+    if reported_params[:reported] and reported_params[:not_reported].nil?
+      query += (query.empty?) ? "reported = ?" : " OR reported = ?"
+      selection << "true"
+    elsif reported_params[:not_reported] and reported_params[:reported].nil?
+      query += (query.empty?) ? "reported = ?" : " OR reported = ?"
+      selection << "false"
+    end
+    if params[:date_method] == "Before"
+      before = params[:before]
+      date = DateTime.new(before[:year].to_i,before[:month].to_i,before[:day].to_i,23,23,59,'-0400')
+      query += (query.empty?) ? "borrowed <= ?" : " AND borrowed <= ?"
+      selection << date
+    elsif params[:date_method] == "After"
+      after = params[:after]
+      date = DateTime.new(after[:year].to_i,after[:month].to_i,after[:day].to_i,23,23,59,'-0400')
+      query += (query.empty?) ? "borrowed >= ?" : " AND borrowed >= ?"
+      selection << date
+    elsif params[:date_method] == "Between"
+      before = params[:before]
+      after = params[:after]
+      before_date = DateTime.new(before[:year].to_i,before[:month].to_i,before[:day].to_i,23,23,59,'-0400')
+      after_date = DateTime.new(after[:year].to_i,after[:month].to_i,after[:day].to_i,23,23,59,'-0400')
+      query += (query.empty?) ? "borrowed BETWEEN ? AND ?" : " AND borrowed BETWEEN ? AND ?"
+      selection << before_date
+      selection << after_date
     end
     selection.unshift(query)
     return selection

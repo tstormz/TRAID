@@ -43,16 +43,16 @@
     <tr>
       <th><%= label_tag(:date_option, "Date Range") %></th>
       <td>
-        <select onchange='displayDateForm();' id="dateSelection">
+        <select onchange='displayDateForm();' id="dateSelection" name="date_method">
           <option></option>
-          <option>Before</option>
-          <option>After</option>
-          <option>Between</option>
+          <option value="Before">Before</option>
+          <option value="After">After</option>
+          <option value="Between">Between</option>
         </select>
       </td>
     </tr>
     <tr class='dates' id='Before' style="display:none">
-      <th><%= label_tag(:before, "Before") %></th>
+      <th><%= label_tag(:b, "Before") %></th>
       <td><%= select_date Date.today, prefix: :before %></td>
     </tr>
     <tr class='dates' id='After' style="display:none">
