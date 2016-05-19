@@ -7,10 +7,29 @@ class ItemsController < ApplicationController
   end
   
   def search
+    cookies.delete :item_list
   end
   
   def show
-    @items = Item.sorted
+    if params[:search]
+      @items = Array.new
+      @search_terms = Array.new
+      cookies[:item_list] = ""
+      item_params.each do |field,keyword|
+        unless keyword.empty?
+          Item.search(field,keyword).each do |item|
+            @items = add_item(@items,item)
+            @search_terms << keyword
+          end
+          cookies[:item_list] += "#{field}::#{keyword}]["
+        end
+      end
+      cookies[:item_list] = cookies[:item_list][0...-2] #cut trailing delimiter
+    elsif params[:back]
+      @items = get_my_items(cookies[:item_list])
+    else
+      @items = Item.sorted
+    end
     @borrowers = Hash.new
     @items.each do |item|
       unless item.available
@@ -44,6 +63,32 @@ class ItemsController < ApplicationController
     Item.create(:name=>"Thing 8", :item_type => "D")
     Item.create(:name=>"Thing 9", :item_type => "A")
     redirect_to(:action => "show")
+  end
+  
+  private
+  
+  def item_params
+    params.permit(:name, :item_type)
+  end
+  
+  def get_my_items(str)
+    items = Array.new
+    str.split("][").each do |tuple|
+      item_args = tuple.split("::")
+      Item.search(item_args[0],item_args[1]).each do |item|
+        items = add_item(items,item)
+      end
+    end
+    return items
+  end
+  
+  def add_item(list,item)
+    if (i = list.index(item)) != nil
+      list.prepend(list.delete_at(i)) #remove and bump to top
+    else
+      list << item
+    end
+    return list
   end
   
 end
