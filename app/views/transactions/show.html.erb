@@ -9,7 +9,8 @@
         <ul>
             <% t.items.each do |item| %>
               <li>
-                <%= item.name %>
+                <% url = {:controller => 'items', :action => 'show', :item_id => item.id} %>
+                <%= link_to(item.name, url) %>
                 <%= @status[i] %>
                 <% i += 1 %>
               </li>

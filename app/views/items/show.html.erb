@@ -30,7 +30,8 @@
           <td>
               <% unless item.available %>
                 <% t = @borrowers[item.id].first %>
-                <%= "#{t.customer.first_name} #{t.customer.last_name}" %>
+                <% link_info = customer_link(t.customer) %>
+                <%= link_to(link_info[0],link_info[1]) %>
                 <br />
               <% end %>
           </td>

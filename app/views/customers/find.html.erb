@@ -1,5 +1,6 @@
 <ul>
   <% @results.each do |customer| %>
-  <li><%= "#{customer.first_name} #{customer.last_name}" %></li>
+  <% link_info = customer_link(customer) %>
+  <li><%= link_to(link_info[0], link_info[1]) %></li>
   <% end %>
 </ul>

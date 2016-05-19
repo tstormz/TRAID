@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   
   private
   
-  helper_method :code_to_label
+  helper_method :code_to_label, :customer_link
   
   def get_t_fields
     return [['Id', 'id'], ['Date', 'updated_at'], ['Customer', 'customer_id'], ['Type', 'transaction_type'],
@@ -59,6 +59,12 @@ class ApplicationController < ActionController::Base
       end
     end
     return nil
+  end
+  
+  def customer_link(customer)
+    url = {:controller => 'transactions', :action => 'show', :page => '0'}
+    name = "#{customer.first_name} #{customer.last_name}"
+    return [name, url.merge({:customer_id => customer.id})]
   end
   
   def get_error_msg(code)

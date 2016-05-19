@@ -27,6 +27,8 @@ class ItemsController < ApplicationController
       cookies[:item_list] = cookies[:item_list][0...-2] #cut trailing delimiter
     elsif params[:back]
       @items = get_my_items(cookies[:item_list])
+    elsif params[:item_id]
+      @items = [Item.find(params[:item_id])] #make array for .each method
     else
       @items = Item.sorted
     end
