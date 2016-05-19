@@ -1,3 +1,18 @@
+<script>
+  function displayDateForm() {
+    var dateOption = document.getElementById("dateSelection").value;
+    var dateFields = document.getElementsByClassName("dates");
+    var i;
+    var displayValue = (dateOption === "Between") ? "table-row" : "none";
+    for (i = 0; i < dateFields.length; i++) {
+      dateFields[i].style.display = displayValue;
+    }
+    if (dateOption !== "Between") {
+          document.getElementById(dateOption).style.display = "table-row";
+    }
+  }
+</script>
+
 <h1>Sort#select</h1>
 <%= form_tag({:action => "index", :method => "post", :selection => true}) do %>
   <table class='vertical'>
@@ -26,10 +41,21 @@
       <td><%= check_box_tag(:not_reported) %></td>
     </tr>
     <tr>
+      <th><%= label_tag(:date_option, "Date Range") %></th>
+      <td>
+        <select onchange='displayDateForm();' id="dateSelection">
+          <option></option>
+          <option>Before</option>
+          <option>After</option>
+          <option>Between</option>
+        </select>
+      </td>
+    </tr>
+    <tr class='dates' id='Before' style="display:none">
       <th><%= label_tag(:before, "Before") %></th>
       <td><%= select_date Date.today, prefix: :before %></td>
     </tr>
-    <tr>
+    <tr class='dates' id='After' style="display:none">
       <th><%= label_tag(:after, "After") %></th>
       <td><%= select_date Date.today, prefix: :after %></td>
     </tr>
