@@ -25,8 +25,8 @@
       </tr>
     <% end %>
 </table>
-<%= submit_tag('Continue') %>
+<%= submit_tag('Continue', :class => 'btn btn-primary') %>
 <% end %>
-<%= button_to('Search Again', {:action => 'add_items', :transaction_id => @transaction.id}) %>
+<%= button_to('Search Again', {:action => 'add_items', :transaction_id => @transaction.id}, :class => 'btn btn-primary') %>
 <%= button_to('Cancel Transaction', {:action => 'delete',
-        :transaction_id => @transaction.id}) %>
+        :transaction_id => @transaction.id}, :class => 'btn btn-danger') %>

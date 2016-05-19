@@ -2,7 +2,7 @@
 @import "bootstrap";
 
 body {
-    background-color: #EEE;
+    background-color: #FFF;
 }
 
 .jumbotron {
@@ -16,11 +16,33 @@ h1, h2{
 }
 
 h2 {
-    margin: 3rem 0;
+    margin: 2rem 0;
 }
 
 p {
-    padding: 2rem 0;
+    padding: 1.5rem 0;
+}
+
+.a-left, .a-right {
+    position: relative;
+    right: 3em;
+}
+
+.a-right {
+    text-align: right;
+}
+
+.a-left {
+    text-align: left;
+    padding: 0;
+}
+
+.alert {
+    text-align: center;
+}
+
+.row {
+    margin: 2rem 0;
 }
 
 span {

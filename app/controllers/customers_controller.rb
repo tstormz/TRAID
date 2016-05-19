@@ -9,6 +9,7 @@ class CustomersController < ApplicationController
   
   def new
     @header = "Create a New Customer"
+    flash[:alert] = "<strong>Success!</strong> This box indicates a successful or positive action"
   end
   
   def create

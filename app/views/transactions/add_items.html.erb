@@ -1,17 +1,25 @@
 <%= form_tag(:action => 'select_items', :transaction_id => @transaction.id, :class => "form-horizontal") do %>
 
-<div class="form-group">
-  <%= label_tag(:name, "Item Name")  %>
-  <%= text_field_tag(:name, params[:name]) %>
+<div class="row">
+  <div class="col-sm-6 a-right">
+      <%= label_tag(:name, "Item Name") %>
+  </div>
+  <div class="col-sm-6 a-left">
+      <%= text_field_tag(:name, params[:name]) %>
+  </div>
 </div>
-<div class="form-group">
-  <%= label_tag(:item_type, "Type") %>
-  <%= text_field_tag(:item_type, params[:item_type]) %>
+<div class="row">
+  <div class="col-sm-6 a-right">
+      <%= label_tag(:item_type, "Type") %>
+  </div>
+  <div class="col-sm-6 a-left">
+    <%= text_field_tag(:item_type, params[:item_type]) %>
+  </div>
 </div>
 
-<%= submit_tag('Search', :class => "btn btn-primary") %>
+  <%= submit_tag('Search', :class => "btn btn-primary") %>
 
 <% end %>
 
 <%= button_to('Cancel transaction', {:action => 'delete',
-  :transaction_id => @transaction.id}, :class => "btn btn-primary") %>
+    :transaction_id => @transaction.id}, :class => "btn btn-danger") %>

@@ -7,10 +7,12 @@ class ItemsController < ApplicationController
   end
   
   def search
+    @header = "Search for Items"
     cookies.delete :item_list
   end
   
   def show
+    @header = "Item Results"
     if params[:search]
       @items = Array.new
       @search_terms = Array.new

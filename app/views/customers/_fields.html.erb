@@ -1,8 +1,16 @@
-<div class="form-group">
-  <%= f.label(:first_name, "First Name", :class => "control-label") %>
-  <%= f.text_field(:first_name) %>
+<div class="row">
+  <div class="col-sm-6 a-right">
+      <%= f.label(:first_name, "First Name", :class => "control-label") %>
+  </div>
+  <div class="col-sm-6 a-left">
+      <%= f.text_field(:first_name) %>
+  </div>
 </div>
-<div class="form-group">
-  <%= f.label(:last_name, "Last Name", :class => "control-label") %>
-  <%= f.text_field(:last_name) %>
+<div class="row">
+  <div class="col-sm-6 a-right">
+      <%= f.label(:last_name, "Last Name", :class => "control-label") %>
+  </div>
+  <div class="col-sm-6 a-left">
+    <%= f.text_field(:last_name) %>
+  </div>
 </div>

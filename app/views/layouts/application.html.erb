@@ -1,24 +1,42 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Traid</title>
-        <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300italic,700|Karla|Raleway|Lora|Montserrat' rel='stylesheet' type='text/css'>
-<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-<%#= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-        <%= csrf_meta_tags %>
-    </head>
-    <body>
-      <div class="jumbotron text-center">
-        <h1>TRAID Database System</h1>
+  <head>
+    <title>Traid</title>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <link href="sb-admin-2.css" rel="stylesheet" />
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+      <% transactions = {:controller => 'transactions'} %>
+      <% customers = {:controller => 'customers'} %>
+      <% items = {:controller => 'items'} %>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+            <%= link_to("The TRAID Program", {:controller=>'menu',:action=>'index'},:class=>'navbar-brand') %>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a><strong>Transactions</strong></a></li>
+          <li><%= link_to('Create', transactions.merge({:action => 'new'})) %></li>
+          <li><%= link_to('Sort', {:controller => 'sort'}) %></li>
+          <li><%= link_to('Select', {:controller => 'sort', :action => 'select'}) %></li>
+          <li class="active"><a><strong>Customers</strong></a></li>
+          <li><%= link_to('New', customers.merge({:action => 'new'})) %></li>
+          <li><%= link_to('Search', customers.merge({:action => 'search'})) %></li>
+          <li class="active"><a><strong>Items</strong></a></li>
+          <li><%= link_to('Show', items.merge({:action => 'show'})) %></li>
+          <li><%= link_to('Search', items.merge({:action => 'search'})) %></li>
+        </ul>
       </div>
-      <div class="container-fluid text-center">
-        <h2><%= @header %></h2>
-        <%= yield %>
-      </div>
-
-        <p id="return_link">
-            <%= link_to('home', root_url) %>
-        </p>
-
-    </body>
+    </nav>
+    <% if flash[:alert] %>
+    <div class="alert alert-success">
+      <%= flash[:alert].html_safe %>
+    </div>
+    <% end %>
+    <div class="container-fluid text-center">
+      <h2><%= @header %></h2>
+      <%= yield %>
+    </div>
+  </body>
 </html>

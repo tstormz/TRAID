@@ -13,9 +13,9 @@
   </div>
 <% end %>
 
-<%= button_to('Add More Items', {:action => 'add_items', :transaction_id => @transaction.id}) %>
+<%= button_to('Add More Items', {:action => 'add_items', :transaction_id => @transaction.id}, :class => 'btn btn-primary') %>
 <% unless @transaction.items.blank? %>
-  <%= button_to('Finished Adding Items', {:action => 'details', :transaction_id => @transaction.id}) %>
+  <%= button_to('Finished Adding Items', {:action => 'details', :transaction_id => @transaction.id}, :class => 'btn btn-primary') %>
 <% end %>
 <%= button_to('Cancel Transaction', {:action => 'delete',
-        :transaction_id => @transaction.id}) %>
+        :transaction_id => @transaction.id}, :class => 'btn btn-danger') %>
